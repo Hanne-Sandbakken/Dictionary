@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace dictionary.Data
 {
@@ -9,11 +10,13 @@ namespace dictionary.Data
         public string NorwegianWord { get; set; }
         public string GermanWord { get; set; }
 
-        public virtual IList<WordProject> WordProjects {get; set;}
+        public virtual IList<WordProject>? WordProjects {get; set;}
 
         [ForeignKey(nameof(CategoryId))]
         public int CategoryId { get; set;}
-        public virtual Category Category { get; set; }
+
+        [JsonIgnore]
+        public virtual Category? Category { get; set; }
 
 
     }
