@@ -11,8 +11,8 @@ using dictionary.Data;
 namespace dictionary.Migrations
 {
     [DbContext(typeof(DictionaryDbContext))]
-    [Migration("20230705142133_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230706090434_tryToUpdateDatabase")]
+    partial class tryToUpdateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,29 +32,9 @@ namespace dictionary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Adjective")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Conjunction")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Interjection")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Noun")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Number")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Preposition")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Pronoun")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Verb")
-                        .HasColumnType("bit");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -70,10 +50,6 @@ namespace dictionary.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -115,6 +91,10 @@ namespace dictionary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");

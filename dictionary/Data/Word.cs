@@ -13,7 +13,7 @@ namespace dictionary.Data
 
         [ForeignKey(nameof(CategoryId))]
         public int CategoryId { get; set;}
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
 
     }
