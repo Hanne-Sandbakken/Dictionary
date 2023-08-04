@@ -4,6 +4,5 @@ namespace dictionary.Dto.Category
 {
     public class CreateCategoryDto : BaseCategoryDto
     {
-       
     }
 }

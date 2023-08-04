@@ -47,10 +47,10 @@ namespace dictionary.Repository
             return await _context.Set<T>().FindAsync(id);
         }
 
-        //public async Task<T> UpdateAsync(T entity)
-        //{
-        //    _context.Update(entity);
-        //    await _context.SaveChangesAsync();
-        //}
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
