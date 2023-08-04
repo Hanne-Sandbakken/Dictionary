@@ -1,4 +1,7 @@
+using dictionary.Configurations;
+using dictionary.Contracts;
 using dictionary.Data;
+using dictionary.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -26,6 +29,12 @@ builder.Services.AddCors(options =>
 });
 
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.WriteTo.Console().ReadFrom.Configuration(context.Configuration));
+
+//the following code allow us to inject automapper anywhere and use it. It is now relative to out AutoMapperConfig.cs:
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
 
 var app = builder.Build();
 
