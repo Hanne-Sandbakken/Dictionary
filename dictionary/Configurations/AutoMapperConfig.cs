@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using dictionary.Data;
 using dictionary.Dto.Category;
-using dictionary.Dto.Category.Word;
+using dictionary.Dto.Word;
 
 namespace dictionary.Configurations
 {

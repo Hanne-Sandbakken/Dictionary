@@ -1,4 +1,4 @@
-﻿using dictionary.Dto.Category.Word;
+﻿using dictionary.Dto.Word;
 
 namespace dictionary.Dto.Category
 {

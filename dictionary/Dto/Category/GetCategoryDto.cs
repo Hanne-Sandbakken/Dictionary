@@ -1,6 +1,6 @@
 ﻿using dictionary.Data;
 using System.ComponentModel.DataAnnotations.Schema;
-using dictionary.Dto.Category.Word;
+using dictionary.Dto.Category;
 
 namespace dictionary.Dto.Category
 {
