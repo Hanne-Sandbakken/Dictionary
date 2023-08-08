@@ -20,19 +20,17 @@ namespace dictionary.Configurations
 
             //Word:
             CreateMap<Word, GetWordDto>().ReverseMap();
-            CreateMap<Word, GetWordDetailsDto>().ReverseMap();
+            CreateMap<Word, GetWordDetailsDto>().ReverseMap(); //vurderer å slette denne Dto-klassen
             CreateMap<Word, CreateWordDto>().ReverseMap();
             CreateMap<Word, UpdateWordDto>().ReverseMap();
 
             //WordProject:
             CreateMap<WordProject, GetWordProjectDto>().ReverseMap();
-            CreateMap<WordProject, GetWordProjectDetailsDto>().ReverseMap();
             CreateMap<WordProject, CreateWordProjectDto>().ReverseMap();
             CreateMap<WordProject, UpdateWordDto>().ReverseMap();
 
             //Project:
             CreateMap<Project, GetProjectDto>().ReverseMap();
-            CreateMap<Project, GetProjectDetailsDto>().ReverseMap();
             CreateMap<Project, CreateProjectDto>().ReverseMap();
             CreateMap<Project, UpdateProjectDto>().ReverseMap();
 

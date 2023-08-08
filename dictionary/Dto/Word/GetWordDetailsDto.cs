@@ -5,9 +5,11 @@ namespace dictionary.Dto.Word
 {
     public class GetWordDetailsDto : BaseWordDto
     {
+        //trenger jeg egentlig denne klassen?
         public int Id { get; set; }
         public int CategoryId { get; set; }
 
-        public virtual IList<GetWordProjectDto>? WordProjects { get; set; }
+        ////Treger ikke denne funksjonaliteten. 
+        //public virtual IList<GetWordProjectDto>? WordProjects { get; set; }
     }
 }
