@@ -11,7 +11,7 @@ namespace dictionary.Data
         public DbSet<Word> Words { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<WordProject> WordsProjects { get; set; }
+        public DbSet<WordProject> WordProjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
