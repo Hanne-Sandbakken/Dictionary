@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dictionary.Repository
 {
-    public class WordProjectRepository : GenericRepository<WordProject>, IWordProjectRepository
+    public class WordProjectsRepository : GenericRepository<WordProject>, IWordProjectsRepository
     {
         private readonly DictionaryDbContext _context;
 
-        public WordProjectRepository(DictionaryDbContext context) : base(context)
+        public WordProjectsRepository(DictionaryDbContext context) : base(context)
         {
             _context = context;
         }

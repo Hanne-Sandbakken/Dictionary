@@ -2,7 +2,7 @@
 
 namespace dictionary.Contracts
 {
-    public interface IWordProjectRepository : IGenericRepository<WordProject>
+    public interface IWordProjectsRepository : IGenericRepository<WordProject>
     {
         Task<WordProject> GetDetails(int id);
     }
