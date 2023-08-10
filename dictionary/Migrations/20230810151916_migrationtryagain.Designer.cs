@@ -11,8 +11,8 @@ using dictionary.Data;
 namespace dictionary.Migrations
 {
     [DbContext(typeof(DictionaryDbContext))]
-    [Migration("20230810115440_newDatabase")]
-    partial class newDatabase
+    [Migration("20230810151916_migrationtryagain")]
+    partial class migrationtryagain
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,16 +49,16 @@ namespace dictionary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("GermanWord")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NorwegianWord")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("WordClassId")
                         .HasColumnType("int");
+
+                    b.Property<string>("de")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("no")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -70,44 +70,44 @@ namespace dictionary.Migrations
                         new
                         {
                             Id = 1,
-                            GermanWord = "Haus",
-                            NorwegianWord = "hus",
-                            WordClassId = 1
+                            WordClassId = 1,
+                            de = "Haus",
+                            no = "hus"
                         },
                         new
                         {
                             Id = 2,
-                            GermanWord = "Flasche",
-                            NorwegianWord = "flaske",
-                            WordClassId = 1
+                            WordClassId = 1,
+                            de = "Flasche",
+                            no = "flaske"
                         },
                         new
                         {
                             Id = 3,
-                            GermanWord = "gehen",
-                            NorwegianWord = "gå",
-                            WordClassId = 2
+                            WordClassId = 2,
+                            de = "gehen",
+                            no = "gå"
                         },
                         new
                         {
                             Id = 4,
-                            GermanWord = "sitzen",
-                            NorwegianWord = "sitte",
-                            WordClassId = 2
+                            WordClassId = 2,
+                            de = "sitzen",
+                            no = "sitte"
                         },
                         new
                         {
                             Id = 5,
-                            GermanWord = "blau",
-                            NorwegianWord = "blå",
-                            WordClassId = 3
+                            WordClassId = 3,
+                            de = "blau",
+                            no = "blå"
                         },
                         new
                         {
                             Id = 6,
-                            GermanWord = "Klein",
-                            NorwegianWord = "liten",
-                            WordClassId = 3
+                            WordClassId = 3,
+                            de = "Klein",
+                            no = "liten"
                         });
                 });
 

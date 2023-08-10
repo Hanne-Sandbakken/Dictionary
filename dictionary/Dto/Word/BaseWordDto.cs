@@ -2,7 +2,7 @@
 {
     public abstract class BaseWordDto
     {
-        public string NorwegianWord { get; set; }
-        public string GermanWord { get; set; }
+        public string no { get; set; }
+        public string de { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace dictionary.Data
     public class Word
     {
         public int Id { get; set; }
-        public string NorwegianWord { get; set; }
-        public string GermanWord { get; set; }
+        public string no { get; set; }
+        public string de { get; set; }
 
         public virtual IList<WordProject>? WordProjects {get; set;}
 

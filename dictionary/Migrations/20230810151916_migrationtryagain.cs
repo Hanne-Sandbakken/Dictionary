@@ -7,7 +7,7 @@
 namespace dictionary.Migrations
 {
     /// <inheritdoc />
-    public partial class newDatabase : Migration
+    public partial class migrationtryagain : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,8 +44,8 @@ namespace dictionary.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NorwegianWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GermanWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    no = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    de = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WordClassId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -98,15 +98,15 @@ namespace dictionary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Words",
-                columns: new[] { "Id", "GermanWord", "NorwegianWord", "WordClassId" },
+                columns: new[] { "Id", "WordClassId", "de", "no" },
                 values: new object[,]
                 {
-                    { 1, "Haus", "hus", 1 },
-                    { 2, "Flasche", "flaske", 1 },
-                    { 3, "gehen", "gå", 2 },
-                    { 4, "sitzen", "sitte", 2 },
-                    { 5, "blau", "blå", 3 },
-                    { 6, "Klein", "liten", 3 }
+                    { 1, 1, "Haus", "hus" },
+                    { 2, 1, "Flasche", "flaske" },
+                    { 3, 2, "gehen", "gå" },
+                    { 4, 2, "sitzen", "sitte" },
+                    { 5, 3, "blau", "blå" },
+                    { 6, 3, "Klein", "liten" }
                 });
 
             migrationBuilder.CreateIndex(

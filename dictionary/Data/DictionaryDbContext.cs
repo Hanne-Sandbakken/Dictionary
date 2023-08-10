@@ -35,39 +35,39 @@ namespace dictionary.Data
                 new Word
                 {
                     Id = 1,
-                    NorwegianWord = "hus",
-                    GermanWord = "Haus",
+                    no = "hus",
+                    de = "Haus",
                     WordClassId = 1
                 }, new Word
                 {
                     Id = 2,
-                    NorwegianWord = "flaske",
-                    GermanWord = "Flasche",
+                    no = "flaske",
+                    de = "Flasche",
                     WordClassId = 1
        
                 }, new Word
                 {
                     Id = 3,
-                    NorwegianWord = "gå",
-                    GermanWord = "gehen",
+                    no = "gå",
+                    de = "gehen",
                     WordClassId = 2
                 }, new Word
                 {
                     Id = 4,
-                    NorwegianWord = "sitte",
-                    GermanWord = "sitzen",
+                    no = "sitte",
+                    de = "sitzen",
                     WordClassId = 2
                 }, new Word
                 {
                     Id = 5,
-                    NorwegianWord = "blå",
-                    GermanWord = "blau",
+                    no = "blå",
+                    de = "blau",
                     WordClassId = 3
                 }, new Word
                 {
                     Id = 6,
-                    NorwegianWord = "liten",
-                    GermanWord = "Klein",
+                    no = "liten",
+                    de = "Klein",
                     WordClassId = 3
                 }
 
