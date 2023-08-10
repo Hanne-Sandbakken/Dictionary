@@ -7,7 +7,7 @@ namespace dictionary.Dto.Word
     {
         //trenger jeg egentlig denne klassen?
         public int Id { get; set; }
-        public int CategoryId { get; set; }
+        public int WordClassId { get; set; }
 
         ////Treger ikke denne funksjonaliteten. 
         //public virtual IList<GetWordProjectDto>? WordProjects { get; set; }

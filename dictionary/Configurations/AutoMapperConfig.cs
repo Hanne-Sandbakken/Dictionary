@@ -13,10 +13,10 @@ namespace dictionary.Configurations
         {
 
             //Category:
-            CreateMap<Category, CreateCategoryDto>().ReverseMap();
-            CreateMap<Category, GetCategoryDto>().ReverseMap();
-            CreateMap<Category, GetCategoryDetailsDto>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
+            CreateMap<WordClass, CreateWordClassDto>().ReverseMap();
+            CreateMap<WordClass, GetWordClassDto>().ReverseMap();
+            CreateMap<WordClass, GetWordClassDetailsDto>().ReverseMap();
+            CreateMap<WordClass, UpdateWordClassDto>().ReverseMap();
 
             //Word:
             CreateMap<Word, GetWordDto>().ReverseMap();

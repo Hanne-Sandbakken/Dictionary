@@ -34,7 +34,7 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.WriteTo.Console(
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+builder.Services.AddScoped<IWordClassRepository, WordClassesRepository>();
 
 var app = builder.Build();
 

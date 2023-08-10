@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using dictionary.Data;
+using AutoMapper;
 
 namespace dictionary.Controllers
 {
@@ -13,6 +14,7 @@ namespace dictionary.Controllers
     [ApiController]
     public class WordsController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly DictionaryDbContext _context;
 
         public WordsController(DictionaryDbContext context)

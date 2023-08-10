@@ -1,6 +1,6 @@
 ﻿namespace dictionary.Dto.Category
 {
-    public class UpdateCategoryDto : BaseCategoryDto
+    public class UpdateWordClassDto : BaseWordClassDto
     {
        public int Id { get; set; }
     }

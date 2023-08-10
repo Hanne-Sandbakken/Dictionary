@@ -2,7 +2,7 @@
 
 namespace dictionary.Dto.Category
 {
-    public class CreateCategoryDto : BaseCategoryDto
+    public class CreateWordClassDto : BaseWordClassDto
     {
     }
 }

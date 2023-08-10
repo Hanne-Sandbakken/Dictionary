@@ -2,7 +2,7 @@
 
 namespace dictionary.Dto.Category
 {
-    public class GetCategoryDetailsDto : BaseCategoryDto
+    public class GetWordClassDetailsDto : BaseWordClassDto
     {
         public int Id { get; set; }
         public List<GetWordDto> Words { get; set; }

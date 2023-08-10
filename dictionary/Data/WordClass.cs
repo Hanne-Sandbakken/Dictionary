@@ -1,6 +1,6 @@
 ﻿namespace dictionary.Data
 {
-    public class Category
+    public class WordClass
     {
         public int Id { get; set; }
         public string Name { get; set; }

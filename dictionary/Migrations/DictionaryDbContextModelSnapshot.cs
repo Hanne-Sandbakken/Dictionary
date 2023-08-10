@@ -21,40 +21,6 @@ namespace dictionary.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("dictionary.Data.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Noun"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Verb"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Adjective"
-                        });
-                });
-
             modelBuilder.Entity("dictionary.Data.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -80,9 +46,6 @@ namespace dictionary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("GermanWord")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -91,9 +54,12 @@ namespace dictionary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("WordClassId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("WordClassId");
 
                     b.ToTable("Words");
 
@@ -101,44 +67,78 @@ namespace dictionary.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 1,
                             GermanWord = "Haus",
-                            NorwegianWord = "hus"
+                            NorwegianWord = "hus",
+                            WordClassId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 1,
                             GermanWord = "Flasche",
-                            NorwegianWord = "flaske"
+                            NorwegianWord = "flaske",
+                            WordClassId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 2,
                             GermanWord = "gehen",
-                            NorwegianWord = "gå"
+                            NorwegianWord = "gå",
+                            WordClassId = 2
                         },
                         new
                         {
                             Id = 4,
-                            CategoryId = 2,
                             GermanWord = "sitzen",
-                            NorwegianWord = "sitte"
+                            NorwegianWord = "sitte",
+                            WordClassId = 2
                         },
                         new
                         {
                             Id = 5,
-                            CategoryId = 3,
                             GermanWord = "blau",
-                            NorwegianWord = "blå"
+                            NorwegianWord = "blå",
+                            WordClassId = 3
                         },
                         new
                         {
                             Id = 6,
-                            CategoryId = 3,
                             GermanWord = "Klein",
-                            NorwegianWord = "liten"
+                            NorwegianWord = "liten",
+                            WordClassId = 3
+                        });
+                });
+
+            modelBuilder.Entity("dictionary.Data.WordClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WordClasses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Noun"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Verb"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Adjective"
                         });
                 });
 
@@ -166,24 +166,24 @@ namespace dictionary.Migrations
 
                     b.HasIndex("WordId");
 
-                    b.ToTable("WordsProjects");
+                    b.ToTable("WordProjects");
                 });
 
             modelBuilder.Entity("dictionary.Data.Word", b =>
                 {
-                    b.HasOne("dictionary.Data.Category", "Category")
+                    b.HasOne("dictionary.Data.WordClass", "WordClass")
                         .WithMany("Words")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("WordClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("WordClass");
                 });
 
             modelBuilder.Entity("dictionary.Data.WordProject", b =>
                 {
                     b.HasOne("dictionary.Data.Project", "Project")
-                        .WithMany("WordsProjects")
+                        .WithMany("WordProjects")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,19 +199,19 @@ namespace dictionary.Migrations
                     b.Navigation("Word");
                 });
 
-            modelBuilder.Entity("dictionary.Data.Category", b =>
-                {
-                    b.Navigation("Words");
-                });
-
             modelBuilder.Entity("dictionary.Data.Project", b =>
                 {
-                    b.Navigation("WordsProjects");
+                    b.Navigation("WordProjects");
                 });
 
             modelBuilder.Entity("dictionary.Data.Word", b =>
                 {
                     b.Navigation("WordProjects");
+                });
+
+            modelBuilder.Entity("dictionary.Data.WordClass", b =>
+                {
+                    b.Navigation("Words");
                 });
 #pragma warning restore 612, 618
         }

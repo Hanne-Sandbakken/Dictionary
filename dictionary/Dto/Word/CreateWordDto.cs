@@ -2,6 +2,6 @@
 {
     public class CreateWordDto : BaseWordDto
     {
-        public int CategoryId { get; set; }
+        public int WordClassId { get; set; }
     }
 }

@@ -12,11 +12,11 @@ namespace dictionary.Data
 
         public virtual IList<WordProject>? WordProjects {get; set;}
 
-        [ForeignKey(nameof(CategoryId))]
-        public int CategoryId { get; set;}
+        [ForeignKey(nameof(WordClassId))]
+        public int WordClassId { get; set;}
 
         [JsonIgnore]
-        public virtual Category? Category { get; set; }
+        public virtual WordClass? WordClass { get; set; }
 
 
     }

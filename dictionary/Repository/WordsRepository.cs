@@ -15,7 +15,8 @@ namespace dictionary.Repository
 
         public async Task<Word> GetDetails(int id)
         {
-            return await _context.Words.Include(query => query.Category)
+            return await _context.Words
+                .Include(query => query.WordClass)
                 .FirstOrDefaultAsync(query => query.Id == id);
         }
     }

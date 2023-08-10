@@ -2,7 +2,7 @@
 
 namespace dictionary.Dto.Category
 {
-    public abstract class BaseCategoryDto
+    public abstract class BaseWordClassDto
     {
         [Required]
         public string Name { get; set; }

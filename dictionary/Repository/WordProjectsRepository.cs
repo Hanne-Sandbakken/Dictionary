@@ -16,7 +16,7 @@ namespace dictionary.Repository
         public async Task<WordProject> GetDetails(int id)
         {
             return await _context.WordProjects.Include(wp => wp.Word)
-                                              .ThenInclude(w => w.Category)
+                                              .ThenInclude(w => w.WordClass)
                                               .Include(wp => wp.Project)
                                               .FirstOrDefaultAsync(wp => wp.Id == id);
         }

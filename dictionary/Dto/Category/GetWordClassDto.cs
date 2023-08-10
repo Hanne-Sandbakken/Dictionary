@@ -4,7 +4,7 @@ using dictionary.Dto.Category;
 
 namespace dictionary.Dto.Category
 {
-    public class GetCategoryDto : BaseCategoryDto
+    public class GetWordClassDto : BaseWordClassDto
     {
         public int Id { get; set; }
         

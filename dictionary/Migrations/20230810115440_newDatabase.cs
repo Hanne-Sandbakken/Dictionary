@@ -2,27 +2,16 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace dictionary.Migrations
 {
     /// <inheritdoc />
-    public partial class tryToUpdateDatabase : Migration
+    public partial class newDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
@@ -37,6 +26,19 @@ namespace dictionary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WordClasses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WordClasses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Words",
                 columns: table => new
                 {
@@ -44,21 +46,21 @@ namespace dictionary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NorwegianWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GermanWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    WordClassId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Words", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Words_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_Words_WordClasses_WordClassId",
+                        column: x => x.WordClassId,
+                        principalTable: "WordClasses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WordsProjects",
+                name: "WordProjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -69,42 +71,65 @@ namespace dictionary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WordsProjects", x => x.Id);
+                    table.PrimaryKey("PK_WordProjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WordsProjects_Projects_ProjectId",
+                        name: "FK_WordProjects_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WordsProjects_Words_WordId",
+                        name: "FK_WordProjects_Words_WordId",
                         column: x => x.WordId,
                         principalTable: "Words",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Words_CategoryId",
+            migrationBuilder.InsertData(
+                table: "WordClasses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Noun" },
+                    { 2, "Verb" },
+                    { 3, "Adjective" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Words",
-                column: "CategoryId");
+                columns: new[] { "Id", "GermanWord", "NorwegianWord", "WordClassId" },
+                values: new object[,]
+                {
+                    { 1, "Haus", "hus", 1 },
+                    { 2, "Flasche", "flaske", 1 },
+                    { 3, "gehen", "gå", 2 },
+                    { 4, "sitzen", "sitte", 2 },
+                    { 5, "blau", "blå", 3 },
+                    { 6, "Klein", "liten", 3 }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_WordsProjects_ProjectId",
-                table: "WordsProjects",
+                name: "IX_WordProjects_ProjectId",
+                table: "WordProjects",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WordsProjects_WordId",
-                table: "WordsProjects",
+                name: "IX_WordProjects_WordId",
+                table: "WordProjects",
                 column: "WordId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Words_WordClassId",
+                table: "Words",
+                column: "WordClassId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WordsProjects");
+                name: "WordProjects");
 
             migrationBuilder.DropTable(
                 name: "Projects");
@@ -113,7 +138,7 @@ namespace dictionary.Migrations
                 name: "Words");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "WordClasses");
         }
     }
 }

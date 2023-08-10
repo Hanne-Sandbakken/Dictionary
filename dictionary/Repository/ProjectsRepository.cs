@@ -17,7 +17,7 @@ namespace dictionary.Repository
             return await _context.Projects
                 .Include(p => p.WordProjects)
                 .ThenInclude(wp => wp.Word)
-                .ThenInclude(w => w.Category)
+                .ThenInclude(w => w.WordClass)
                 .SingleOrDefaultAsync(p => p.Id == id);
         }
     }
