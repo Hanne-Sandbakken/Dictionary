@@ -53,75 +53,72 @@ namespace dictionary.Controllers
             return Ok(wordDto);
         }
 
-    //    // PUT: api/Words/5
-    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //    [HttpPut("{id}")]
-    //    public async Task<IActionResult> PutWord(int id, Word word)
-    //    {
-    //        if (id != word.Id)
-    //        {
-    //            return BadRequest();
-    //        }
+        // PUT: api/Words/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutWord(int id, UpdateWordDto updateWordDto)
+        {
+            if (id != updateWordDto.Id)
+            {
+                return BadRequest("Invalid Record Id");
+            }
 
-    //        _wordRepository.Entry(word).State = EntityState.Modified;
+            var word = await _wordRepository.GetAsync(id);
 
-    //        try
-    //        {
-    //            await _wordRepository.SaveChangesAsync();
-    //        }
-    //        catch (DbUpdateConcurrencyException)
-    //        {
-    //            if (!WordExists(id))
-    //            {
-    //                return NotFound();
-    //            }
-    //            else
-    //            {
-    //                throw;
-    //            }
-    //        }
+            if (word == null)
+            {
+                return NotFound();
+            }
 
-    //        return NoContent();
-    //    }
+            _mapper.Map(updateWordDto, word);
 
-    //    // POST: api/Words
-    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //    [HttpPost]
-    //    public async Task<ActionResult<Word>> PostWord(Word word)
-    //    {
-    //      if (_wordRepository.Words == null)
-    //      {
-    //          return Problem("Entity set 'DictionaryDbContext.Words'  is null.");
-    //      }
-    //        _wordRepository.Words.Add(word);
-    //        await _wordRepository.SaveChangesAsync();
+            try
+            {
+                await _wordRepository.UpdateAsync(word);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await WordExist(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-    //        return CreatedAtAction("GetWord", new { id = word.Id }, word);
-    //    }
+            return NoContent();
+        }
 
-    //    // DELETE: api/Words/5
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteWord(int id)
-    //    {
-    //        if (_wordRepository.Words == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        var word = await _wordRepository.Words.FindAsync(id);
-    //        if (word == null)
-    //        {
-    //            return NotFound();
-    //        }
 
-    //        _wordRepository.Words.Remove(word);
-    //        await _wordRepository.SaveChangesAsync();
+        // POST: api/Words
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Word>> PostWord(CreateWordDto createWordDto)
+        {
+            var word = _mapper.Map<Word>(createWordDto);
 
-    //        return NoContent();
-    //    }
+            await _wordRepository.AddAsync(word);
+            return CreatedAtAction("GetWord", new {id = word.Id}, word);
+        }
 
-    //    private bool WordExists(int id)
-    //    {
-    //        return (_wordRepository.Words?.Any(e => e.Id == id)).GetValueOrDefault();
-    //    }
+        // DELETE: api/Words/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWord(int id)
+        {
+            var word = await _wordRepository.GetAsync(id);
+            if (word == null)
+            {
+                return NotFound();
+            }
+            await _wordRepository.DeleteAsync(id);
+            return NoContent();
+        }
+
+        private async Task<bool> WordExist(int id)
+        {
+            return await _wordRepository.Exists(id);
+        }
     }
 }
