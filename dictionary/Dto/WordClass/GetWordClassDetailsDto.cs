@@ -1,6 +1,6 @@
 ﻿using dictionary.Dto.Word;
 
-namespace dictionary.Dto.Category
+namespace dictionary.Dto.WordClass
 {
     public class GetWordClassDetailsDto : BaseWordClassDto
     {

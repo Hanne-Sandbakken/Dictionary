@@ -1,8 +1,8 @@
 ﻿using dictionary.Data;
 using System.ComponentModel.DataAnnotations.Schema;
-using dictionary.Dto.Category;
+using dictionary.Dto.WordClass;
 
-namespace dictionary.Dto.Category
+namespace dictionary.Dto.WordClass
 {
     public class GetWordClassDto : BaseWordClassDto
     {

@@ -6,8 +6,8 @@ namespace dictionary.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DictionaryDbContext _context;
-        public GenericRepository(DictionaryDbContext context)
+        private readonly IWordRepositoy _context;
+        public GenericRepository(IWordRepositoy context)
         {
             _context = context;
         }

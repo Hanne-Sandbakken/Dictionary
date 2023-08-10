@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace dictionary.Dto.Category
+namespace dictionary.Dto.WordClass
 {
     public class CreateWordClassDto : BaseWordClassDto
     {

@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("DictionaryDbConnectionString");
-builder.Services.AddDbContext<DictionaryDbContext>(options =>
+builder.Services.AddDbContext<IWordRepositoy>(options =>
 {
     options.UseSqlServer(connectionString);
 });

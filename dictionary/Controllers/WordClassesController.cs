@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using dictionary.Data;
-using dictionary.Dto.Category;
+using dictionary.Dto.WordClass;
 using AutoMapper;
 using dictionary.Contracts;
 

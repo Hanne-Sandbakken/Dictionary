@@ -3,9 +3,9 @@ using Microsoft.Identity.Client.Extensibility;
 
 namespace dictionary.Data
 {
-    public class DictionaryDbContext : DbContext
+    public class IWordRepositoy : DbContext
     {
-        public DictionaryDbContext(DbContextOptions options) : base(options)
+        public IWordRepositoy(DbContextOptions options) : base(options)
         {
         }
         public DbSet<Word> Words { get; set; }

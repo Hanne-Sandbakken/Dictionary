@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using dictionary.Data;
-using dictionary.Dto.Category;
+using dictionary.Dto.WordClass;
 using dictionary.Dto.Project;
 using dictionary.Dto.Word;
 using dictionary.Dto.WordProjects;

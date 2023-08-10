@@ -6,9 +6,9 @@ namespace dictionary.Repository
 {
     public class WordsRepository : GenericRepository<Word>, IWordsRepository
     {
-        private readonly DictionaryDbContext _context;
+        private readonly IWordRepositoy _context;
 
-        public WordsRepository(DictionaryDbContext context) : base(context)
+        public WordsRepository(IWordRepositoy context) : base(context)
         {
             _context = context;
         }

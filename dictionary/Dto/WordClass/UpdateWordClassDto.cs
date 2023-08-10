@@ -1,4 +1,4 @@
-﻿namespace dictionary.Dto.Category
+﻿namespace dictionary.Dto.WordClass
 {
     public class UpdateWordClassDto : BaseWordClassDto
     {

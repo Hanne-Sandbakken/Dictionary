@@ -10,7 +10,7 @@ using dictionary.Data;
 
 namespace dictionary.Migrations
 {
-    [DbContext(typeof(DictionaryDbContext))]
+    [DbContext(typeof(IWordRepositoy))]
     [Migration("20230810115440_newDatabase")]
     partial class newDatabase
     {
