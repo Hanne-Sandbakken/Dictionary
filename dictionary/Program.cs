@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString("DictionaryDbConnectionString");
-builder.Services.AddDbContext<IWordRepositoy>(options =>
+builder.Services.AddDbContext<DictionaryDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
@@ -35,6 +35,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IWordClassRepository, WordClassesRepository>();
+builder.Services.AddScoped<IWordsRepository, WordsRepository>();
 
 var app = builder.Build();
 

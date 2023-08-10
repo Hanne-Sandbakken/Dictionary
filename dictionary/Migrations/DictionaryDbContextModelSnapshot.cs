@@ -9,7 +9,7 @@ using dictionary.Data;
 
 namespace dictionary.Migrations
 {
-    [DbContext(typeof(IWordRepositoy))]
+    [DbContext(typeof(DictionaryDbContext))]
     partial class DictionaryDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

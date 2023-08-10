@@ -6,9 +6,9 @@ namespace dictionary.Repository
 {
     public class ProjectsRepository : GenericRepository<Project>, IProjectsRepository
     {
-        private readonly IWordRepositoy _context;
+        private readonly DictionaryDbContext _context;
 
-        public ProjectsRepository(IWordRepositoy context) : base(context)
+        public ProjectsRepository(DictionaryDbContext context) : base(context)
         {
             _context = context;
         }

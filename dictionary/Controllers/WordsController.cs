@@ -9,6 +9,8 @@ using dictionary.Data;
 using AutoMapper;
 using dictionary.Dto.WordClass;
 using dictionary.Repository;
+using dictionary.Dto.Word;
+using dictionary.Contracts;
 
 namespace dictionary.Controllers
 {
@@ -17,9 +19,9 @@ namespace dictionary.Controllers
     public class WordsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IWordRepositoy _wordRepository;
+        private readonly IWordsRepository _wordRepository;
 
-        public WordsController(IMapper mapper, IWordRepositoy wordRepository)
+        public WordsController(IMapper mapper, IWordsRepository wordRepository)
         {
             _mapper = mapper;
             _wordRepository = wordRepository;
@@ -27,106 +29,99 @@ namespace dictionary.Controllers
 
         // GET: api/Words
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WordDto>>> GetWords()
+        public async Task<ActionResult<IEnumerable<GetWordDto>>> GetWords()
         {
-          //if (_wordRepository.Words == null)
-          //{
-          //    return NotFound();
-          //}
-          //  return await _wordRepository.Words.ToListAsync();
-
+           
             var words = await _wordRepository.GetAllAsync();
-            var records = _mapper.Map<List<GetWordClassDto>>(wordClasses);
+            var records = _mapper.Map<List<GetWordDto>>(words);
             return Ok(records);
+
         }
 
         // GET: api/Words/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Word>> GetWord(int id)
+        public async Task<ActionResult<GetWordDetailsDto>> GetWord(int id)
         {
-          if (_wordRepository.Words == null)
-          {
-              return NotFound();
-          }
-            var word = await _wordRepository.Words.FindAsync(id);
+            var word = await _wordRepository.GetDetails(id);
 
             if (word == null)
             {
                 return NotFound();
             }
-
-            return word;
+            
+            var wordDto = _mapper.Map<GetWordDetailsDto>(word);
+            return Ok(wordDto);
         }
 
-        // PUT: api/Words/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutWord(int id, Word word)
-        {
-            if (id != word.Id)
-            {
-                return BadRequest();
-            }
+    //    // PUT: api/Words/5
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPut("{id}")]
+    //    public async Task<IActionResult> PutWord(int id, Word word)
+    //    {
+    //        if (id != word.Id)
+    //        {
+    //            return BadRequest();
+    //        }
 
-            _wordRepository.Entry(word).State = EntityState.Modified;
+    //        _wordRepository.Entry(word).State = EntityState.Modified;
 
-            try
-            {
-                await _wordRepository.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WordExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //        try
+    //        {
+    //            await _wordRepository.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!WordExists(id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        // POST: api/Words
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Word>> PostWord(Word word)
-        {
-          if (_wordRepository.Words == null)
-          {
-              return Problem("Entity set 'DictionaryDbContext.Words'  is null.");
-          }
-            _wordRepository.Words.Add(word);
-            await _wordRepository.SaveChangesAsync();
+    //    // POST: api/Words
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPost]
+    //    public async Task<ActionResult<Word>> PostWord(Word word)
+    //    {
+    //      if (_wordRepository.Words == null)
+    //      {
+    //          return Problem("Entity set 'DictionaryDbContext.Words'  is null.");
+    //      }
+    //        _wordRepository.Words.Add(word);
+    //        await _wordRepository.SaveChangesAsync();
 
-            return CreatedAtAction("GetWord", new { id = word.Id }, word);
-        }
+    //        return CreatedAtAction("GetWord", new { id = word.Id }, word);
+    //    }
 
-        // DELETE: api/Words/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteWord(int id)
-        {
-            if (_wordRepository.Words == null)
-            {
-                return NotFound();
-            }
-            var word = await _wordRepository.Words.FindAsync(id);
-            if (word == null)
-            {
-                return NotFound();
-            }
+    //    // DELETE: api/Words/5
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteWord(int id)
+    //    {
+    //        if (_wordRepository.Words == null)
+    //        {
+    //            return NotFound();
+    //        }
+    //        var word = await _wordRepository.Words.FindAsync(id);
+    //        if (word == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _wordRepository.Words.Remove(word);
-            await _wordRepository.SaveChangesAsync();
+    //        _wordRepository.Words.Remove(word);
+    //        await _wordRepository.SaveChangesAsync();
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        private bool WordExists(int id)
-        {
-            return (_wordRepository.Words?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+    //    private bool WordExists(int id)
+    //    {
+    //        return (_wordRepository.Words?.Any(e => e.Id == id)).GetValueOrDefault();
+    //    }
     }
 }
