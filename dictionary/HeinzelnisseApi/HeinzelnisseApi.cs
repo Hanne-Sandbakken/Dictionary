@@ -20,17 +20,11 @@ namespace dictionary.HeinzelnisseApi
 
                 if (result?.noTrans.Count() > 0)
                 {
-                    foreach (TranslationApiResponse apiTrans in result.noTrans)
-                    {
-                        words.AddRange(TranslationApiMapper.ApiToWords(result));
-                    }
+                    words.AddRange(TranslationApiMapper.ApiToWords(result));
                 }
                 else if (result?.deTrans.Count() > 0)
                 {
-                    foreach (TranslationApiResponse apiTrans in result.deTrans)
-                    {
-                        words.AddRange(TranslationApiMapper.ApiToWords(result));
-                    }
+                    words.AddRange(TranslationApiMapper.ApiToWords(result));
                 }
                 return words;
             }
