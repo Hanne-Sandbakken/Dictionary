@@ -11,6 +11,7 @@ using dictionary.Dto.WordClass;
 using dictionary.Repository;
 using dictionary.Dto.Word;
 using dictionary.Contracts;
+using dictionary.HeinzelnisseApi;
 
 namespace dictionary.Controllers
 {
@@ -18,40 +19,61 @@ namespace dictionary.Controllers
     [ApiController]
     public class WordsController : ControllerBase
     {
+        private readonly IHeinzelnisseApi _heinzelnisseApi;
         private readonly IMapper _mapper;
         private readonly IWordsRepository _wordRepository;
 
-        public WordsController(IMapper mapper, IWordsRepository wordRepository)
+        public WordsController(IMapper mapper, IWordsRepository wordRepository, IHeinzelnisseApi heinzelnisseApi)
         {
             _mapper = mapper;
             _wordRepository = wordRepository;
+            _heinzelnisseApi = heinzelnisseApi;
         }
 
         // GET: api/Words
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetWordDto>>> GetWords()
+        [HttpGet("{search}")]
+        public async Task<ActionResult<IEnumerable<GetWordDto>>> GetWords(string search)
         {
-           
-            var words = await _wordRepository.GetAllAsync();
-            var records = _mapper.Map<List<GetWordDto>>(words);
-            return Ok(records);
+            //Hent resultater fra Heinzelnisse API
+            var searchResult = await _heinzelnisseApi.GetDetails(search);
 
-        }
-
-        // GET: api/Words/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetWordDetailsDto>> GetWord(int id)
-        {
-            var word = await _wordRepository.GetDetails(id);
-
-            if (word == null)
+            var resultDto = searchResult.Select(result => new GetWordDto
             {
-                return NotFound();
-            }
-            
-            var wordDto = _mapper.Map<GetWordDetailsDto>(word);
-            return Ok(wordDto);
+                no = result.no,
+                de = result.de,
+            });
+            return Ok(resultDto);
+
+           ////henter ordene fra eget repository
+           // var wordsFromRepo = await _wordRepository.GetAllAsync();
+           // var records = _mapper.Map<List<GetWordDto>>(wordsFromRepo);
+
+
+           // //Legg til resultatene fra API i din eksisterende liste
+           // records.AddRange(searchResult.Select(result => new GetWordDto
+           // {
+           //     //mapper relevant informasjon fra søket til din GetWordDto
+           //     no = result.no,
+           //     de = result.de,
+           // }));
+           // return Ok(records);
+
         }
+
+        //// GET: api/Words/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<GetWordDetailsDto>> GetWord(int id)
+        //{
+        //    var word = await _wordRepository.GetDetails(id);
+
+        //    if (word == null)
+        //    {
+        //        return NotFound();
+        //    }
+            
+        //    var wordDto = _mapper.Map<GetWordDetailsDto>(word);
+        //    return Ok(wordDto);
+        //}
 
         // PUT: api/Words/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -15,6 +15,8 @@ namespace dictionary.Repository
 
         public async Task<Word> GetDetails(int id)
         {
+            //get words from API
+           // List<Word>? apiResponse = await _hein
             return await _context.Words
                 .Include(query => query.WordClass)
                 .FirstOrDefaultAsync(query => query.Id == id);
