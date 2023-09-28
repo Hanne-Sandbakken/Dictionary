@@ -5,25 +5,10 @@ namespace dictionary.HeinzelnisseApi
 {
     public static class TranslationApiMapper
     {
-        //public static List<Word> ApiToWords(IEnumerable<TranslationApiResponse> responses)
-        //{
-        //    List<Word> words = new List<Word>();
-        //    foreach (var response in responses)
-        //    {
-        //        Word word = new Word()
-        //        {
-        //            no = response.word,
-        //            de = response.t_word
-        //        };
-        //        words.Add(word);
-        //    }
-        //    return words;
-        //}
         public static List<Word> ApiToWords(TranslationsApiResponse response)
         {
             List<Word> words = new();
 
-            //Word word = new();
             if (response != null)
             {
                 if (response.noTrans != null && response.noTrans.Count() > 0)
@@ -51,9 +36,6 @@ namespace dictionary.HeinzelnisseApi
                     }
                 }
             }
-            // words.Add(word);
-
-
             return words;
         }
 

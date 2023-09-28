@@ -31,6 +31,15 @@ namespace dictionary.Controllers
         }
 
         // GET: api/Words
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetWordDto>>> GetDatabaseWords()
+        {
+            var words = await _wordRepository.GetAllAsync();
+            var records = _mapper.Map<List<GetWordDto>>(words);
+            return Ok(records);
+        }
+
+        // GET: api/Words
         [HttpGet("{search}")]
         public async Task<ActionResult<IEnumerable<GetWordDto>>> GetWords(string search)
         {
